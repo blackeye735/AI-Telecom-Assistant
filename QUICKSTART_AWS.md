@@ -104,6 +104,53 @@ sudo systemctl daemon-reload
 sudo systemctl enable --now telecom-api telecom-streamlit
 ```
 
+### Step 4C.1: Update OpenRouter API key and redeploy
+
+If the OpenRouter API key changes, update the EC2 application environment and restart the services.
+
+1. SSH into the EC2 instance:
+
+```bash
+ssh -i ~/Downloads/telecom-assistant.pem ubuntu@YOUR_PUBLIC_DNS
+```
+
+2. Open the `.env` file in the repo directory:
+
+```bash
+cd /home/ubuntu/telecom-assistant
+nano .env
+```
+
+3. Replace the old key with the new one:
+
+```env
+OPENROUTER_API_KEY=NEW_OPENROUTER_API_KEY
+```
+
+4. Save the file and restart the services:
+
+```bash
+sudo systemctl restart telecom-api telecom-streamlit
+```
+
+5. Confirm both services are running:
+
+```bash
+sudo systemctl status telecom-api telecom-streamlit
+```
+
+6. Test the app in a browser or via curl:
+
+```bash
+curl -I http://127.0.0.1:8501
+```
+
+If you are using the `.env.aws.ec2` template instead of a direct `.env` file, copy it over again after editing:
+
+```bash
+cp .env.aws.ec2 .env
+```
+
 ### Step 4D: Expose the app on port 80 (5 minutes)
 
 ```bash
