@@ -60,7 +60,7 @@ Follow the comprehensive guide in **AWS_DEPLOYMENT.md**
 
 ```bash
 # Quick local test
-export OPENROUTER_API_KEY=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
+export OPENROUTER_API_KEY=YOUR_OPENROUTER_API_KEY
 docker-compose up --build
 
 # Access at:
@@ -119,8 +119,8 @@ AWS App Runner
 
 ```bash
 LLM_PROVIDER=openrouter
-OPENROUTER_API_KEY=sk-or-v1-cd165...
-OPENROUTER_MODEL=openai/gpt-4o
+OPENROUTER_API_KEY=YOUR_OPENROUTER_API_KEY
+OPENROUTER_MODEL=your-model-here
 LLM_TEMPERATURE=0.1
 LLM_MAX_TOKENS=1024
 EMBEDDING_BACKEND=local

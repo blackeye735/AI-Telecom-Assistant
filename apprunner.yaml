@@ -15,9 +15,9 @@ run:
     - name: LLM_PROVIDER
       value: "openrouter"
     - name: OPENROUTER_API_KEY
-      value: "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"
+      value: "YOUR_OPENROUTER_API_KEY"
     - name: OPENROUTER_MODEL
-      value: "openai/gpt-4o"
+      value: "your-model-here"
     - name: LLM_TEMPERATURE
       value: "0.1"
     - name: LLM_MAX_TOKENS

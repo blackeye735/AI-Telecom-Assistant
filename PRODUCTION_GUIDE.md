@@ -140,8 +140,8 @@ curl -X POST http://127.0.0.1:8000/chat \
 
 ```env
 LLM_PROVIDER=openrouter
-OPENROUTER_API_KEY=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
-OPENROUTER_MODEL=openai/gpt-4o
+OPENROUTER_API_KEY=YOUR_OPENROUTER_API_KEY
+OPENROUTER_MODEL=your-model-here
 LLM_TEMPERATURE=0.1
 LLM_MAX_TOKENS=1024
 EMBEDDING_BACKEND=local
@@ -154,7 +154,7 @@ To use a different model, update `.env`:
 
 ```env
 # For faster/cheaper responses:
-OPENROUTER_MODEL=openai/gpt-4o-mini
+OPENROUTER_MODEL=your-model-here
 
 # For Claude via OpenRouter:
 OPENROUTER_MODEL=anthropic/claude-3.5-sonnet
@@ -318,7 +318,7 @@ pip install -r requirements.txt
 # Use AWS Secrets Manager instead of .env
 aws secretsmanager create-secret \
   --name telecom-assistant/openrouter-key \
-  --secret-string "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"
+  --secret-string "YOUR_OPENROUTER_API_KEY"
 
 # Update config.py to fetch from Secrets Manager
 ```

@@ -58,8 +58,8 @@ When creating App Runner service (QUICKSTART_AWS.md Step 4), manually add each e
 **Required Variables:**
 ```
 LLM_PROVIDER=openrouter
-OPENROUTER_API_KEY=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
-OPENROUTER_MODEL=openai/gpt-4o
+OPENROUTER_API_KEY=YOUR_OPENROUTER_API_KEY
+OPENROUTER_MODEL=your-model-here
 LLM_TEMPERATURE=0.1
 LLM_MAX_TOKENS=1024
 EMBEDDING_BACKEND=local
@@ -88,7 +88,7 @@ Use GitHub Actions with secrets for fully automated deployment:
 1. GitHub repo → Settings → Secrets and variables → Actions
 2. Click "New repository secret"
 3. Name: `OPENROUTER_API_KEY`
-4. Secret: `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`
+4. Secret: `YOUR_OPENROUTER_API_KEY`
 5. Add secret
 
 Repeat for AWS credentials:
@@ -198,7 +198,7 @@ The `apprunner.yaml` file currently has your API key hardcoded:
 ```yaml
 env:
   - name: OPENROUTER_API_KEY
-    value: "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"
+    value: "YOUR_OPENROUTER_API_KEY"
 ```
 
 ### For Private Repository:

@@ -9,7 +9,7 @@
 - [ ] AWS Account with IAM permissions
 - [ ] Docker installed locally (for local testing)
 - [ ] GitHub account
-- [ ] OpenRouter API key: `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`
+- [ ] OpenRouter API key: `YOUR_OPENROUTER_API_KEY`
 
 ---
 
@@ -136,7 +136,7 @@ run:
     - name: LLM_PROVIDER
       value: "openrouter"
     - name: OPENROUTER_API_KEY
-      value: "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"
+      value: "YOUR_OPENROUTER_API_KEY"
     - name: OPENROUTER_MODEL
       value: "openai/gpt-4o"
     - name: LLM_TEMPERATURE
@@ -265,8 +265,8 @@ Example: `123456789012.dkr.ecr.us-east-1.amazonaws.com/telecom-assistant:latest`
 5. **Environment variables:** Click **Add environment variable** for each:
    ```
    LLM_PROVIDER=openrouter
-   OPENROUTER_API_KEY=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
-   OPENROUTER_MODEL=openai/gpt-4o
+   OPENROUTER_API_KEY=YOUR_OPENROUTER_API_KEY
+   OPENROUTER_MODEL=your-model-here
    LLM_TEMPERATURE=0.1
    LLM_MAX_TOKENS=1024
    EMBEDDING_BACKEND=local

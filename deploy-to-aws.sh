@@ -196,7 +196,7 @@ read -r OPENROUTER_KEY
 
 if [ -z "$OPENROUTER_KEY" ]; then
     echo -e "${YELLOW}WARNING: No API key provided. Using default from .env${NC}"
-    OPENROUTER_KEY="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"
+    OPENROUTER_KEY="YOUR_OPENROUTER_API_KEY"
 fi
 
 # Create App Runner configuration

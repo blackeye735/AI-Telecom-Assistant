@@ -77,7 +77,7 @@ Before deploying to AWS, test locally:
 
 ```bash
 # Set your OpenRouter API key
-export OPENROUTER_API_KEY=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
+export OPENROUTER_API_KEY=YOUR_OPENROUTER_API_KEY
 
 # Build and run with docker-compose
 docker-compose up --build
@@ -271,7 +271,7 @@ cat > apprunner-config.json << EOF
         "Port": "8501",
         "RuntimeEnvironmentVariables": {
           "LLM_PROVIDER": "openrouter",
-          "OPENROUTER_API_KEY": "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",
+          "OPENROUTER_API_KEY": "YOUR_OPENROUTER_API_KEY",
           "OPENROUTER_MODEL": "openai/gpt-4o",
           "LLM_TEMPERATURE": "0.1",
           "LLM_MAX_TOKENS": "1024",

@@ -52,7 +52,7 @@ Create the environment file:
 cat > .env <<'EOF'
 LLM_PROVIDER=openrouter
 OPENROUTER_API_KEY=YOUR_OPENROUTER_API_KEY
-OPENROUTER_MODEL=openai/gpt-4o
+OPENROUTER_MODEL=your-model-here
 LLM_TEMPERATURE=0.1
 LLM_MAX_TOKENS=1024
 EMBEDDING_BACKEND=local
@@ -118,7 +118,10 @@ server {
         proxy_set_header Host $host;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
         proxy_read_timeout 86400;
+        proxy_buffering off;
     }
 }
 EOF
@@ -144,6 +147,45 @@ If you want a real HTTPS URL, install Certbot:
 sudo apt install -y certbot python3-certbot-nginx
 sudo certbot --nginx -d your-domain.com
 ```
+
+Before running Certbot, make sure your domain already points to this EC2 instance via an A record (or Route 53 alias), and that port 80/443 are open in the EC2 security group. Certbot cannot issue a certificate if the domain does not resolve publicly to your server.
+
+### Custom domain with Route 53 (recommended)
+
+If you want a clean HTTPS URL such as `https://ai-telecom-assistant.com`, use this AWS Route 53 setup:
+
+1. In the AWS Console, open **Route 53** → **Hosted zones**.
+2. Create or select your public hosted zone for your domain (for example, `ai-telecom-assistant.com`).
+3. Create these records:
+
+   - Record 1: `A` record
+     - Name: `ai-telecom-assistant.com`
+     - Value: `13.49.225.140` (replace with your EC2 public IPv4 address, or better, your Elastic IP)
+     - TTL: `60`
+
+   - Record 2: `CNAME` record
+     - Name: `www`
+     - Value: `ai-telecom-assistant.com`
+     - TTL: `60`
+
+4. If you use another DNS provider instead of Route 53, create the same two records there:
+   - `A` record for `ai-telecom-assistant.com` → your EC2 public IPv4 address
+   - `CNAME` record for `www` → `ai-telecom-assistant.com`
+
+5. After DNS propagation, test with:
+
+```bash
+nslookup ai-telecom-assistant.com
+curl -I http://ai-telecom-assistant.com
+```
+
+6. Then request HTTPS:
+
+```bash
+sudo certbot --nginx -d ai-telecom-assistant.com -d www.ai-telecom-assistant.com
+```
+
+> Best practice: attach an Elastic IP to the EC2 instance and point the A record to that IP. This keeps your domain stable even if the instance is stopped and restarted.
 
 ---
 
@@ -243,8 +285,8 @@ echo "Image URI: $ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/$REPO_NAME:latest"
 4. **Add Environment Variables** (click "Add environment variable" 8 times):
    ```
    LLM_PROVIDER = openrouter
-   OPENROUTER_API_KEY = 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
-   OPENROUTER_MODEL = openai/gpt-4o
+   OPENROUTER_API_KEY = YOUR_OPENROUTER_API_KEY
+   OPENROUTER_MODEL = your-model-here
    LLM_TEMPERATURE = 0.1
    LLM_MAX_TOKENS = 1024
    EMBEDDING_BACKEND = local

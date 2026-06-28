@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="AI-Powered Telecom Knowledge Assistant — a LangGraph, FastAPI, and Streamlit application for 5G/3GPP knowledge queries." />
+  <title>AI Telecom Assistant | GitHub Pages</title>
+  <style>
+    :root {
+      --bg: #07111f;
+      --panel: #101d33;
+      --panel-2: #13243f;
+      --text: #f5f8ff;
+      --muted: #b8c6dc;
+      --accent: #00c2ff;
+      --accent-2: #6a5cff;
+      --success: #22c55e;
+      --warn: #f59e0b;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Inter", "Segoe UI", Roboto, Arial, sans-serif;
+      color: var(--text);
+      background: radial-gradient(circle at top left, #15324e 0%, var(--bg) 45%, #030814 100%);
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(12px);
+      background: rgba(7, 17, 31, 0.8);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .navbar .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 20px;
+    }
+
+    .brand {
+      font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      font-size: 1.35rem;
+      color: #ffffff;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .nav-links a:hover { color: white; }
+
+    .hero {
+      padding: 64px 20px 48px;
+      background: linear-gradient(135deg, rgba(0,194,255,0.12), rgba(106,92,255,0.16));
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.18);
+      font-size: 0.9rem;
+      margin-bottom: 14px;
+      color: #dff9ff;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 4vw, 3.3rem);
+      margin: 0 0 14px;
+      line-height: 1.15;
+    }
+
+    .hero p {
+      font-size: 1.05rem;
+      max-width: 720px;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 18px;
+      border-radius: 999px;
+      font-weight: 700;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn-primary {
+      background: linear-gradient(90deg, #ff7a00, #ff4d6d);
+      color: white;
+      box-shadow: 0 12px 28px rgba(255, 77, 109, 0.3);
+      padding: 13px 20px;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.09);
+      border: 1px solid rgba(255,255,255,0.14);
+      color: white;
+    }
+
+    .hero-card {
+      border-radius: 24px;
+      padding: 24px;
+      background: linear-gradient(145deg, rgba(8, 16, 29, 0.86), rgba(13, 24, 41, 0.78));
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.24);
+    }
+
+    .hero-card h3 { margin-top: 0; }
+
+    .hero-card ul { padding-left: 18px; color: var(--muted); }
+
+    section {
+      padding: 36px 20px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
+    }
+
+    .card h3 { margin-top: 0; margin-bottom: 10px; color: #fff; }
+
+    .architecture-flow {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .flow-card {
+      background: linear-gradient(145deg, rgba(255,255,255,0.08), rgba(12, 24, 42, 0.9));
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 16px;
+      padding: 14px;
+      text-align: center;
+      min-height: 140px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.18);
+    }
+
+    .flow-icon {
+      font-size: 1.4rem;
+      margin-bottom: 8px;
+    }
+
+    .flow-card strong { display: block; margin-bottom: 5px; color: #fff; }
+    .flow-card small { color: var(--muted); line-height: 1.4; }
+
+    .flow-arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #7dd3fc;
+      font-size: 1.3rem;
+      font-weight: 700;
+    }
+    .card p, .card li { color: var(--muted); }
+
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .chip {
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(0,194,255,0.14);
+      color: #bdefff;
+      font-size: 0.95rem;
+      border: 1px solid rgba(0,194,255,0.22);
+    }
+
+    .status {
+      display: inline-block;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 0.86rem;
+      font-weight: 700;
+      margin-top: 10px;
+    }
+
+    .status.good { background: rgba(34,197,94,0.15); color: #9af0b4; }
+    .status.warn { background: rgba(245,158,11,0.15); color: #ffd58a; }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    ol, ul { padding-left: 20px; }
+
+    .quote {
+      padding: 18px 20px;
+      border-left: 4px solid var(--accent);
+      background: rgba(0,194,255,0.1);
+      border-radius: 10px;
+      color: #dff9ff;
+      margin-top: 14px;
+    }
+
+    footer {
+      padding: 28px 20px 48px;
+      color: var(--muted);
+      border-top: 1px solid rgba(255,255,255,0.08);
+      text-align: center;
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid, .two-col, .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container">
+      <div class="brand">AI Telecom Assistant</div>
+      <div class="nav-links">
+        <a href="#overview">Overview</a>
+        <a href="#architecture">Architecture</a>
+        <a href="#samples">Sample Questions</a>
+        <a href="http://16.192.73.9/" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="padding: 9px 14px; border-radius: 999px;">Launch App</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="badge">GitHub Pages • AWS EC2 • AI RAG Assistant</div>
+        <h1>AI-Powered Telecom Knowledge Assistant</h1>
+        <p>
+          A production-oriented telecom AI assistant that combines LangGraph, ChromaDB, FastAPI, Streamlit, and OpenRouter to answer advanced 5G, LTE, 3GPP, and network architecture questions with document-backed responses.
+        </p>
+        <div class="button-row">
+          <a class="btn btn-primary" href="http://16.192.73.9/" target="_blank" rel="noopener noreferrer">Launch Live App</a>
+          <a class="btn btn-secondary" href="https://github.com/blackeye735/AI-Telecom-Assistant" target="_blank" rel="noopener noreferrer">View GitHub Repository</a>
+          <a class="btn btn-secondary" href="AI_Telecom_Assistant_Production_Report.html" target="_blank" rel="noopener noreferrer">Open Production Report</a>
+        </div>
+        <div class="quote">
+          <strong>Current deployment note:</strong> This GitHub Pages site is a static landing page. The live application is hosted on EC2 and opens only when you click the Launch App button above.
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <h3>What this project does</h3>
+        <ul>
+          <li>Answers telecom questions using a retrieval-augmented generation pipeline.</li>
+          <li>Supports both Q&amp;A and document summarization workflows.</li>
+          <li>Uses a multi-agent LangGraph flow with router, retrieval, validation, and human approval.</li>
+          <li>Provides a modern Streamlit UI and a FastAPI backend for deployment.</li>
+        </ul>
+        <div class="status good">Production-ready concept + AWS-ready deployment</div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="overview">
+      <h2 style="margin-top:0;">Project Overview</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Core Purpose</h3>
+          <p>The assistant helps users explore 5G NR, LTE, 3GPP standards, HARQ, QoS, core network architecture, and telecommunications concepts with grounded answers and source citations.</p>
+        </div>
+        <div class="card">
+          <h3>AI Engine</h3>
+          <p>Built with OpenRouter and an OpenAI-compatible model stack, paired with a powerful retrieval system grounded in telecom documentation.</p>
+        </div>
+        <div class="card">
+          <h3>Deployment Style</h3>
+          <p>Designed for local-first development, with clear AWS EC2 deployment paths for future scaling and public hosting.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="architecture">
+      <div class="card">
+        <h3>End-to-end application architecture</h3>
+        <p>This architecture shows the full user journey from a telecom question to an AI-generated answer, including the deployed EC2 runtime and the supporting services behind the scenes.</p>
+
+        <div class="architecture-flow">
+          <div class="flow-card">
+            <div class="flow-icon">💬</div>
+            <strong>User Query</strong>
+            <small>Person asks a telecom question through the web UI.</small>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-card">
+            <div class="flow-icon">🖥️</div>
+            <strong>Streamlit UI</strong>
+            <small>Interactive frontend hosted on AWS EC2 for the end user.</small>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-card">
+            <div class="flow-icon">⚙️</div>
+            <strong>FastAPI + LangGraph</strong>
+            <small>Backend routes the request through router, retrieval, generation, and validation agents.</small>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-card">
+            <div class="flow-icon">🧠</div>
+            <strong>RAG Pipeline</strong>
+            <small>ChromaDB retrieves relevant 3GPP content and OpenRouter generates the final response.</small>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-card">
+            <div class="flow-icon">✅</div>
+            <strong>Answer Delivered</strong>
+            <small>Response is returned with confidence, sources, and optional review logic.</small>
+          </div>
+        </div>
+
+        <div class="chip-row">
+          <span class="chip">🧩 LangGraph</span>
+          <span class="chip">⚡ FastAPI</span>
+          <span class="chip">📊 Streamlit</span>
+          <span class="chip">🗂️ ChromaDB</span>
+          <span class="chip">🤖 OpenRouter</span>
+          <span class="chip">☁️ AWS EC2</span>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Key Capabilities</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>RAG-based Answers</h3>
+          <p>Retrieves telecom documents and answers questions with context-aware reasoning rather than generic chatbot replies.</p>
+        </div>
+        <div class="card">
+          <h3>Summarization</h3>
+          <p>Can summarize complex telecom topics such as network slicing, 3GPP releases, Open RAN, and 5G core architecture.</p>
+        </div>
+        <div class="card">
+          <h3>Human Review Flow</h3>
+          <p>Low-confidence outputs can be routed to human approval to improve trustworthiness and academic presentation quality.</p>
+        </div>
+        <div class="card">
+          <h3>Session Memory</h3>
+          <p>Conversation history is preserved across turns so the assistant can maintain context during multi-step telecom questions.</p>
+        </div>
+        <div class="card">
+          <h3>Source Attribution</h3>
+          <p>Answers are tied back to relevant telecom sources and documents to make the output transparent and useful.</p>
+        </div>
+        <div class="card">
+          <h3>Cloud-Ready Design</h3>
+          <p>Prepared for EC2 deployment, with future-ready pathways for S3, secrets management, and larger-scale infrastructures.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="samples">
+      <h2>Sample Questions</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Q&amp;A Examples</h3>
+          <ul>
+            <li>What is 5G NR and what frequency bands does it use?</li>
+            <li>Explain HARQ in 5G NR.</li>
+            <li>What are 5QI values and how are they used?</li>
+            <li>Describe the 5G core network architecture.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Summarization Examples</h3>
+          <ul>
+            <li>Summarize network slicing in 5G.</li>
+            <li>Give an overview of 3GPP Release 16.</li>
+            <li>What is Open RAN? Summarize the key components.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Project Files</h3>
+          <ul>
+            <li><a href="README.md" style="color:#fff; text-decoration: underline;">README.md</a></li>
+            <li><a href="PRODUCTION_GUIDE.md" style="color:#fff; text-decoration: underline;">PRODUCTION_GUIDE.md</a></li>
+            <li><a href="QUICKSTART_AWS.md" style="color:#fff; text-decoration: underline;">QUICKSTART_AWS.md</a></li>
+            <li><a href="AWS_DEPLOYMENT.md" style="color:#fff; text-decoration: underline;">AWS_DEPLOYMENT.md</a></li>
+            <li><a href="AWS_CONSOLE_DEPLOYMENT.md" style="color:#fff; text-decoration: underline;">AWS_CONSOLE_DEPLOYMENT.md</a></li>
+            <li><a href="run_local.md" style="color:#fff; text-decoration: underline;">run_local.md</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <strong>AI Telecom Assistant</strong><br />
+      Hosted on GitHub Pages from the repository <a href="https://github.com/blackeye735/AI-Telecom-Assistant" style="color:#fff; text-decoration: underline;">blackeye735/AI-Telecom-Assistant</a><br />
+      Live application currently served from AWS EC2 at <a href="http://16.192.73.9/" style="color:#fff; text-decoration: underline;">AI Telecom Knowledge Assistant</a><br />
+      <span style="color:#8fdcff;">Created with ❤️ by Argho Chakraborty</span>
+    </div>
+  </footer>
+</body>
+</html>

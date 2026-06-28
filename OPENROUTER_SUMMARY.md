@@ -21,7 +21,7 @@ Successfully integrated **OpenRouter API** into the AI-Powered Telecom Knowledge
 
 ### 3. Environment Configuration
 - Updated `.env.example` with OpenRouter template
-- Created `.env` with active API key: `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`
+- Created `.env` with an API key placeholder: `YOUR_OPENROUTER_API_KEY`
 - Set `LLM_PROVIDER=openrouter`
 
 ---
