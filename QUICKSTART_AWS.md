@@ -1,6 +1,149 @@
 # 🚀 Quick Start: AWS Deployment (5 Steps)
 
-**Time:** 20 minutes | **Cost:** ~$19/month (demo usage) | **No AWS CLI needed**
+**Time:** 20 minutes | **Cost:** ~$0-$1/month (free-tier EC2) | **No AWS CLI needed**
+
+---
+
+## Free-tier alternative: Amazon EC2 (recommended)
+
+AWS App Runner is a paid service. For a Streamlit + FastAPI app, the best free-tier AWS option is an Amazon EC2 instance in the free-tier eligible family (for example, `t2.micro` or `t3.micro`, subject to region availability).
+
+> AWS Lambda is not a good fit here because Streamlit needs a long-running server and FastAPI needs a persistent process. EC2 is the simplest free-tier AWS choice.
+
+### Step 4A: Launch an EC2 instance (3 minutes)
+
+1. Open the AWS Console → **EC2** → **Launch instance**
+2. Name: `telecom-assistant`
+3. AMI: **Ubuntu Server 24.04 LTS**
+4. Instance type: **t2.micro** (or **t3.micro** if `t2.micro` is unavailable)
+5. Key pair: create a new `.pem` key pair or use an existing one
+6. Network settings:
+   - Allow **SSH** from `0.0.0.0/0.0.0.0`
+   - Allow **HTTP** from `0.0.0.0/0.0.0.0`
+   - Allow **HTTPS** from `0.0.0.0/0.0.0.0`
+7. Click **Launch instance**
+8. Wait for the instance to show **Running**
+9. Copy the **Public IPv4 DNS** value
+
+### Step 4B: Connect to the instance and deploy (10 minutes)
+
+```bash
+ssh -i ~/Downloads/telecom-assistant.pem ubuntu@YOUR_PUBLIC_DNS
+```
+
+```bash
+sudo apt update
+sudo apt install -y python3-pip python3-venv git curl nginx
+```
+
+```bash
+cd /home/ubuntu
+git clone https://github.com/YOUR-USERNAME/telecom-assistant.git
+cd telecom-assistant
+python3 -m venv .venv
+source .venv/bin/activate
+pip install --upgrade pip
+pip install -r requirements.txt
+```
+
+Create the environment file:
+
+```bash
+cat > .env <<'EOF'
+LLM_PROVIDER=openrouter
+OPENROUTER_API_KEY=YOUR_OPENROUTER_API_KEY
+OPENROUTER_MODEL=openai/gpt-4o
+LLM_TEMPERATURE=0.1
+LLM_MAX_TOKENS=1024
+EMBEDDING_BACKEND=local
+CONFIDENCE_THRESHOLD=0.6
+API_PORT=8000
+EOF
+```
+
+### Step 4C: Run FastAPI and Streamlit as services (5 minutes)
+
+```bash
+sudo tee /etc/systemd/system/telecom-api.service > /dev/null <<'EOF'
+[Unit]
+Description=Telecom FastAPI Backend
+After=network.target
+
+[Service]
+User=ubuntu
+WorkingDirectory=/home/ubuntu/telecom-assistant
+Environment=PATH=/home/ubuntu/telecom-assistant/.venv/bin
+ExecStart=/home/ubuntu/telecom-assistant/.venv/bin/uvicorn app.api.main:app --host 0.0.0.0 --port 8000
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+EOF
+```
+
+```bash
+sudo tee /etc/systemd/system/telecom-streamlit.service > /dev/null <<'EOF'
+[Unit]
+Description=Telecom Streamlit UI
+After=network.target
+
+[Service]
+User=ubuntu
+WorkingDirectory=/home/ubuntu/telecom-assistant
+Environment=PATH=/home/ubuntu/telecom-assistant/.venv/bin
+ExecStart=/home/ubuntu/telecom-assistant/.venv/bin/streamlit run app/ui/streamlit_app.py --server.port 8501 --server.address 0.0.0.0 --server.headless true
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+EOF
+```
+
+```bash
+sudo systemctl daemon-reload
+sudo systemctl enable --now telecom-api telecom-streamlit
+```
+
+### Step 4D: Expose the app on port 80 (5 minutes)
+
+```bash
+sudo tee /etc/nginx/sites-available/telecom > /dev/null <<'EOF'
+server {
+    listen 80 default_server;
+    server_name _;
+
+    location / {
+        proxy_pass http://127.0.0.1:8501;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_read_timeout 86400;
+    }
+}
+EOF
+```
+
+```bash
+sudo ln -s /etc/nginx/sites-available/telecom /etc/nginx/sites-enabled/
+sudo nginx -t
+sudo systemctl restart nginx
+```
+
+### Step 4E: Open the app (1 minute)
+
+1. Open your browser and go to:
+   `http://YOUR_PUBLIC_DNS`
+2. Test the UI with: `What is 5G NR?`
+
+### Optional: HTTPS for a cleaner URL
+
+If you want a real HTTPS URL, install Certbot:
+
+```bash
+sudo apt install -y certbot python3-certbot-nginx
+sudo certbot --nginx -d your-domain.com
+```
 
 ---
 
