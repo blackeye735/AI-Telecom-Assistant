@@ -22,6 +22,7 @@ from pydantic import BaseModel, Field
 from app.graph.graph_builder import build_graph
 from app.graph.state import TelecomState
 from app.memory.session_memory import session_memory
+from app.rag.periodic_ingest import periodic_ingest_manager
 from app.utils.logger import setup_logger
 
 log = setup_logger("api")
@@ -56,7 +57,13 @@ async def startup_event() -> None:
     global _graph
     log.info("Building LangGraph pipeline…")
     _graph = build_graph()
+    periodic_ingest_manager.start()
     log.info("LangGraph ready.")
+
+
+@app.on_event("shutdown")
+async def shutdown_event() -> None:
+    periodic_ingest_manager.stop()
 
 
 # ── Request / Response models ─────────────────────────────────────────────────

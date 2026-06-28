@@ -58,6 +58,11 @@ CHUNK_OVERLAP = int(os.getenv("CHUNK_OVERLAP", "50"))
 TOP_K_RETRIEVAL = int(os.getenv("TOP_K_RETRIEVAL", "4"))
 TOP_K_SUMMARIZE = int(os.getenv("TOP_K_SUMMARIZE", "6"))
 
+# Optional background refresh of the ChromaDB vector store on EC2
+RAG_REFRESH_ENABLED = os.getenv("RAG_REFRESH_ENABLED", "false").strip().lower() in {"1", "true", "yes", "on"}
+RAG_REFRESH_INTERVAL_MINUTES = int(os.getenv("RAG_REFRESH_INTERVAL_MINUTES", "60"))
+RAG_REFRESH_ON_STARTUP = os.getenv("RAG_REFRESH_ON_STARTUP", "true").strip().lower() in {"1", "true", "yes", "on"}
+
 # ── Dataset ───────────────────────────────────────────────────────────────────
 TSPEC_DATASET = "rasoul-nikbakht/TSpec-LLM"
 TSPEC_SAMPLE_SIZE = int(os.getenv("TSPEC_SAMPLE_SIZE", "200"))
