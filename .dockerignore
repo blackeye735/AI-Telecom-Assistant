@@ -1,0 +1,75 @@
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+
+# Virtual Environment
+.venv/
+venv/
+ENV/
+env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Documentation
+*.md
+!README.md
+docs/
+
+# Tests
+tests/
+test_*.py
+*_test.py
+
+# CI/CD
+.github/
+.gitlab-ci.yml
+
+# Temporary files
+*.log
+*.tmp
+tmp/
+temp/
+
+# Large files (if any)
+*.tar
+*.zip
+*.gz
+
+# AWS deployment files
+deploy-to-aws.sh
+AWS_DEPLOYMENT.md
+deployment-info.txt
+
+# PDF generation scripts
+generate_pdf_report.py
+generate_simple_pdf.py
+convert_to_pdf.py
+test_openrouter.py
+
+# HTML reports
+*.html
+
+# Docker
+Dockerfile
+docker-compose.yml
+.dockerignore
