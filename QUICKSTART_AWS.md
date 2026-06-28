@@ -50,9 +50,11 @@ git clone https://github.com/YOUR-USERNAME/telecom-assistant.git
 cd telecom-assistant
 
 # Set variables (CHANGE us-east-1 if needed)
-export REGION=us-east-1
+#export REGION=us-east-1
+export REGION=eu-north-1
 export ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
-export REPO_NAME=telecom-assistant
+#export REPO_NAME=telecom-assistant
+export REPO_NAME=ai-telecom-assistant
 
 # Create ECR repository
 aws ecr create-repository --repository-name $REPO_NAME --region $REGION
