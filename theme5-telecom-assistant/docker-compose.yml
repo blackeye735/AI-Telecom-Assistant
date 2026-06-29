@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  telecom-assistant:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: telecom-assistant
+    ports:
+      - "8000:8000"  # FastAPI
+      - "8501:8501"  # Streamlit
+    environment:
+      # LLM Configuration
+      - LLM_PROVIDER=openrouter
+      - OPENROUTER_API_KEY=${OPENROUTER_API_KEY}
+      - OPENROUTER_MODEL=openai/gpt-4o
+      - LLM_TEMPERATURE=0.1
+      - LLM_MAX_TOKENS=1024
+
+      # RAG Configuration
+      - EMBEDDING_BACKEND=local
+      - CHROMA_COLLECTION=tspec_telecom
+      - CHUNK_SIZE=400
+      - CHUNK_OVERLAP=50
+      - TOP_K_RETRIEVAL=4
+      - CONFIDENCE_THRESHOLD=0.6
+
+      # API Configuration
+      - API_HOST=0.0.0.0
+      - API_PORT=8000
+    volumes:
+      # Mount data and chroma_db for persistence (optional for demo)
+      - ./chroma_db:/app/chroma_db
+      - ./data:/app/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8501/_stcore/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+# Optional: If you want to test with a separate network
+# networks:
+#   telecom-net:
+#     driver: bridge

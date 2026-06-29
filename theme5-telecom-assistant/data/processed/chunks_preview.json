@@ -1,0 +1,332 @@
+[
+  {
+    "text": "5G NR (New Radio) is the global standard for a unified, more capable 5G wireless air interface, defined by 3GPP starting from Release 15 (2018). It operates in two frequency ranges: FR1 (sub-6 GHz, 410 MHz – 7.125 GHz) and FR2 (millimetre wave, 24.25 – 52.6 GHz)",
+    "metadata": {
+      "source": "3GPP_TS38.300",
+      "topic": "5G NR Overview",
+      "spec": "TS 38.300",
+      "release": "15",
+      "chunk_index": 0,
+      "chunk_total": 2
+    }
+  },
+  {
+    "text": ". 5G NR supports three primary use cases: enhanced Mobile Broadband (eMBB) for extreme data rates, Ultra-Reliable Low-Latency Communication (URLLC) targeting sub-1 ms latency, and massive Machine-Type Communication (mMTC) for IoT. Peak downlink throughput targets 20 Gbps (eMBB). Defined in 3GPP TS 38.300.",
+    "metadata": {
+      "source": "3GPP_TS38.300",
+      "topic": "5G NR Overview",
+      "spec": "TS 38.300",
+      "release": "15",
+      "chunk_index": 1,
+      "chunk_total": 2
+    }
+  },
+  {
+    "text": "The 5G core network (5GC) follows a Service-Based Architecture (SBA) where network functions (NFs) expose services via RESTful HTTP/2 APIs",
+    "metadata": {
+      "source": "3GPP_TS23.501",
+      "topic": "5G Core Network (5GC)",
+      "spec": "TS 23.501",
+      "release": "15",
+      "chunk_index": 0,
+      "chunk_total": 4
+    }
+  },
+  {
+    "text": ". Key NFs: AMF (Access and Mobility Management Function) handles NAS signalling and UE registration; SMF (Session Management Function) manages PDU sessions and IP address allocation; UPF (User Plane Function) routes user-plane traffic; PCF (Policy Control Function) provides QoS policies; UDM (Unified Data Management) stores subscriber data",
+    "metadata": {
+      "source": "3GPP_TS23.501",
+      "topic": "5G Core Network (5GC)",
+      "spec": "TS 23.501",
+      "release": "15",
+      "chunk_index": 1,
+      "chunk_total": 4
+    }
+  },
+  {
+    "text": "; AUSF (Authentication Server Function) performs authentication",
+    "metadata": {
+      "source": "3GPP_TS23.501",
+      "topic": "5G Core Network (5GC)",
+      "spec": "TS 23.501",
+      "release": "15",
+      "chunk_index": 2,
+      "chunk_total": 4
+    }
+  },
+  {
+    "text": ". Xn interface: between gNBs. N2: gNB–AMF. N3: gNB–UPF. N4: SMF–UPF. Defined in TS 23.501.",
+    "metadata": {
+      "source": "3GPP_TS23.501",
+      "topic": "5G Core Network (5GC)",
+      "spec": "TS 23.501",
+      "release": "15",
+      "chunk_index": 3,
+      "chunk_total": 4
+    }
+  },
+  {
+    "text": "LTE (Long Term Evolution) — also called 4G LTE — is standardised in 3GPP Release 8 (2008). The air interface is E-UTRA (Evolved Universal Terrestrial Radio Access). LTE uses OFDMA in the downlink and SC-FDMA in the uplink. Supported bandwidths: 1.4, 3, 5, 10, 15, 20 MHz",
+    "metadata": {
+      "source": "3GPP_TS36.300",
+      "topic": "LTE (4G)",
+      "spec": "TS 36.300",
+      "release": "8",
+      "chunk_index": 0,
+      "chunk_total": 2
+    }
+  },
+  {
+    "text": ". Supported bandwidths: 1.4, 3, 5, 10, 15, 20 MHz. LTE-Advanced (Release 10, 2011) added carrier aggregation (up to 100 MHz total), CoMP (Coordinated Multi-Point), and enhanced MIMO. LTE-Advanced Pro (Release 13+) added NB-IoT, eMTC, and LAA. Peak downlink: 300 Mbps (LTE Cat-6), 3 Gbps (LTE-Advanced Pro). Defined in TS 36.300.",
+    "metadata": {
+      "source": "3GPP_TS36.300",
+      "topic": "LTE (4G)",
+      "spec": "TS 36.300",
+      "release": "8",
+      "chunk_index": 1,
+      "chunk_total": 2
+    }
+  },
+  {
+    "text": "Massive MIMO (Multiple Input Multiple Output) is a key 5G NR technology using antenna arrays with 32–256 antenna elements at the gNB. Beamforming steers energy towards individual UEs using phase and amplitude control. 5G NR supports up to 8 downlink MIMO layers (rank-8 DL) and 4 uplink layers. Full Dimension MIMO (FD-MIMO) supports 3D beamforming (both azimuth and elevation steering)",
+    "metadata": {
+      "source": "3GPP_TS38.214",
+      "topic": "Massive MIMO and Beamforming",
+      "spec": "TS 38.214",
+      "release": "15",
+      "chunk_index": 0,
+      "chunk_total": 2
+    }
+  },
+  {
+    "text": ". Codebook-based precoding uses SRS (Sounding Reference Signals) and CSI-RS for channel estimation. Non-codebook precoding allows the UE to suggest a precoder. Defined in TS 38.214.",
+    "metadata": {
+      "source": "3GPP_TS38.214",
+      "topic": "Massive MIMO and Beamforming",
+      "spec": "TS 38.214",
+      "release": "15",
+      "chunk_index": 1,
+      "chunk_total": 2
+    }
+  },
+  {
+    "text": "5G NR physical layer numerology is defined in TS 38.211. Subcarrier spacing (SCS) options: 15 kHz, 30 kHz, 60 kHz (FR1); 60 kHz, 120 kHz (FR2); 240 kHz (FR2 reference). Slot duration: 1 ms (15 kHz SCS), 0.5 ms (30 kHz), 0.25 ms (60 kHz), 0.125 ms (120 kHz). A radio frame is 10 ms; a subframe is 1 ms; each subframe contains 2^μ slots (μ = numerology index)",
+    "metadata": {
+      "source": "3GPP_TS38.211",
+      "topic": "NR Physical Layer Numerology",
+      "spec": "TS 38.211",
+      "release": "15",
+      "chunk_index": 0,
+      "chunk_total": 2
+    }
+  },
+  {
+    "text": ". Mini-slots (2, 4, or 7 OFDM symbols) reduce scheduling latency for URLLC. Both FDD and TDD are supported. Cyclic prefix: normal (14 OFDM symbols/slot) or extended (12 symbols).",
+    "metadata": {
+      "source": "3GPP_TS38.211",
+      "topic": "NR Physical Layer Numerology",
+      "spec": "TS 38.211",
+      "release": "15",
+      "chunk_index": 1,
+      "chunk_total": 2
+    }
+  },
+  {
+    "text": "Network Slicing allows a single 5G physical network to host multiple isolated virtual networks (slices). Each slice is identified by an S-NSSAI (Single Network Slice Selection Assistance Information) comprising SST (Slice/Service Type) and an optional SD (Slice Differentiator). Standardised SST values: 1 = eMBB, 2 = URLLC, 3 = MIoT (Massive IoT), 4 = V2X",
+    "metadata": {
+      "source": "3GPP_TS23.501_Slicing",
+      "topic": "Network Slicing",
+      "spec": "TS 23.501",
+      "release": "15",
+      "chunk_index": 0,
+      "chunk_total": 2
+    }
+  },
+  {
+    "text": ". The NSSF (Network Slice Selection Function) selects slices at UE registration. Slices can have dedicated UPFs, SMFs, and PCFs for isolation. Maximum 8 S-NSSAIs per UE in one PLMN. Defined in TS 23.501, Section 5.15.",
+    "metadata": {
+      "source": "3GPP_TS23.501_Slicing",
+      "topic": "Network Slicing",
+      "spec": "TS 23.501",
+      "release": "15",
+      "chunk_index": 1,
+      "chunk_total": 2
+    }
+  },
+  {
+    "text": "VoNR (Voice over New Radio) delivers native voice over 5G Standalone networks using IMS (IP Multimedia Subsystem), defined in TS 26.114 and TS 23.228. VoNR quality of service uses 5QI=1 (GBR, 100 ms packet delay budget) for conversational voice. Codec support: EVS (Enhanced Voice Services) is mandatory; AMR-WB is also supported",
+    "metadata": {
+      "source": "3GPP_TS26.114",
+      "topic": "Voice over NR (VoNR)",
+      "spec": "TS 26.114",
+      "release": "15",
+      "chunk_index": 0,
+      "chunk_total": 2
+    }
+  },
+  {
+    "text": ". EPS Fallback: when 5G coverage is insufficient, the UE falls back to LTE/VoLTE for the voice call. SRVCC (Single Radio Voice Call Continuity) enables handover of VoNR to UTRAN/GERAN. VoNR requires IMS registration over the 5G PDU session with dedicated QoS flow.",
+    "metadata": {
+      "source": "3GPP_TS26.114",
+      "topic": "Voice over NR (VoNR)",
+      "spec": "TS 26.114",
+      "release": "15",
+      "chunk_index": 1,
+      "chunk_total": 2
+    }
+  },
+  {
+    "text": "5G security architecture is defined in TS 33.501. Primary authentication uses 5G-AKA (Authentication and Key Agreement) or EAP-AKA' protocols. SUCI (Subscription Concealed Identifier) conceals the SUPI (permanent subscriber ID) on the air interface using ECIES (Elliptic Curve Integrated Encryption Scheme). Security keys: KAUSF → KSEAF → KAMF → KgNB (hierarchical key derivation)",
+    "metadata": {
+      "source": "3GPP_TS33.501",
+      "topic": "5G Security Architecture",
+      "spec": "TS 33.501",
+      "release": "15",
+      "chunk_index": 0,
+      "chunk_total": 2
+    }
+  },
+  {
+    "text": ". NAS (Non-Access Stratum) integrity protection is mandatory; NAS confidentiality is also supported. AS (Access Stratum) security provides both integrity and encryption of RRC and user-plane data. Supported algorithms: 128-bit NEA0 (null), NEA1 (SNOW 3G), NEA2 (AES-CTR), NEA3 (ZUC).",
+    "metadata": {
+      "source": "3GPP_TS33.501",
+      "topic": "5G Security Architecture",
+      "spec": "TS 33.501",
+      "release": "15",
+      "chunk_index": 1,
+      "chunk_total": 2
+    }
+  },
+  {
+    "text": "Handover procedures in 5G NR are specified in TS 38.300 and TS 38.331. Types of handover: (1) Intra-gNB handover — within the same base station, no core involvement. (2) Xn-based handover — between different gNBs via the Xn interface, without AMF involvement (fast). (3) N2-based handover — involves the AMF; used for inter-AMF scenarios",
+    "metadata": {
+      "source": "3GPP_TS38.300_HO",
+      "topic": "5G Handover Procedures",
+      "spec": "TS 38.300",
+      "release": "16",
+      "chunk_index": 0,
+      "chunk_total": 2
+    }
+  },
+  {
+    "text": ". (4) Conditional Handover (CHO) — UE executes handover independently upon meeting conditions, reducing interruption time at cell edges. DAPS (Dual Active Protocol Stack) handover maintains the source cell connection until the target is ready, reducing packet loss. Handover measurement events: A3, A4, A5 for intra-frequency; B1, B2 for inter-RAT.",
+    "metadata": {
+      "source": "3GPP_TS38.300_HO",
+      "topic": "5G Handover Procedures",
+      "spec": "TS 38.300",
+      "release": "16",
+      "chunk_index": 1,
+      "chunk_total": 2
+    }
+  },
+  {
+    "text": "HARQ (Hybrid Automatic Repeat reQuest) combines FEC (Forward Error Correction) with ARQ retransmissions to provide reliable data delivery in 5G NR. 5G NR supports up to 16 HARQ processes per UE in the downlink and 16 in the uplink",
+    "metadata": {
+      "source": "3GPP_TS38.212",
+      "topic": "HARQ in 5G NR",
+      "spec": "TS 38.212",
+      "release": "15",
+      "chunk_index": 0,
+      "chunk_total": 3
+    }
+  },
+  {
+    "text": ". Combining methods: Chase Combining (retransmit identical data) and Incremental Redundancy (IR) which transmits different parity bits each retransmission for additional coding gain. HARQ-ACK/NACK feedback is sent on PUCCH. Asynchronous HARQ is used in both UL and DL for flexibility. HARQ round-trip time (RTT) is ~8 ms in LTE, reduced to ~4 ms in 5G NR (30 kHz SCS)",
+    "metadata": {
+      "source": "3GPP_TS38.212",
+      "topic": "HARQ in 5G NR",
+      "spec": "TS 38.212",
+      "release": "15",
+      "chunk_index": 1,
+      "chunk_total": 3
+    }
+  },
+  {
+    "text": ". Defined in TS 38.212 and TS 38.213.",
+    "metadata": {
+      "source": "3GPP_TS38.212",
+      "topic": "HARQ in 5G NR",
+      "spec": "TS 38.212",
+      "release": "15",
+      "chunk_index": 2,
+      "chunk_total": 3
+    }
+  },
+  {
+    "text": "QoS (Quality of Service) framework in 5G is governed by 5QI (5G QoS Identifier) values defined in TS 23.501, Table 5.7.4-1. QoS flows are either GBR (Guaranteed Bit Rate) or Non-GBR. Key GBR 5QI values: 1 (Conversational Voice, 100 ms delay), 2 (Conversational Video, 150 ms), 3 (Real-Time Gaming, 50 ms), 65 (Mission-Critical Push-to-Talk, 75 ms)",
+    "metadata": {
+      "source": "3GPP_TS23.501_QoS",
+      "topic": "5G QoS and 5QI",
+      "spec": "TS 23.501",
+      "release": "15",
+      "chunk_index": 0,
+      "chunk_total": 2
+    }
+  },
+  {
+    "text": ". Key Non-GBR 5QI values: 5 (IMS Signalling, 100 ms), 8 & 9 (Video TCP, 300 ms), 6 (Video UDP, 300 ms). QoS parameters: 5QI, ARP (Allocation and Retention Priority), GBR/MBR/AMBR. The SMF enforces QoS policy; the UPF marks and shapes packets.",
+    "metadata": {
+      "source": "3GPP_TS23.501_QoS",
+      "topic": "5G QoS and 5QI",
+      "spec": "TS 23.501",
+      "release": "15",
+      "chunk_index": 1,
+      "chunk_total": 2
+    }
+  },
+  {
+    "text": "Open RAN (O-RAN) disaggregates traditional monolithic base stations into open, interoperable components. Key O-RAN elements: O-RU (Radio Unit) handles RF and lower PHY; O-DU (Distributed Unit) handles upper PHY, MAC, and RLC; O-CU (Centralised Unit) handles PDCP, SDAP, and RRC. The Open Fronthaul interface (O-RAN WG4 7.2x split) connects O-RU to O-DU",
+    "metadata": {
+      "source": "ORAN_Alliance_WG1",
+      "topic": "Open RAN Architecture",
+      "spec": "O-RAN.WG1",
+      "release": "N/A",
+      "chunk_index": 0,
+      "chunk_total": 2
+    }
+  },
+  {
+    "text": ". RIC (RAN Intelligent Controller): Near-RT RIC (10 ms–1 s control loop) runs xApps; Non-RT RIC (>1 s) runs rApps for policy-based optimisation. O-RAN enables multi-vendor deployments, AI/ML-driven RAN optimisation, and cost reduction. O1, O2, A1, E2 are key O-RAN interfaces.",
+    "metadata": {
+      "source": "ORAN_Alliance_WG1",
+      "topic": "Open RAN Architecture",
+      "spec": "O-RAN.WG1",
+      "release": "N/A",
+      "chunk_index": 1,
+      "chunk_total": 2
+    }
+  },
+  {
+    "text": "NB-IoT (Narrowband IoT), defined in 3GPP Release 13, is a Low Power Wide Area (LPWA) standard occupying 180 kHz bandwidth. Deployment modes: in-band (within LTE carrier), guard-band, standalone",
+    "metadata": {
+      "source": "3GPP_TS36.211_NB-IoT",
+      "topic": "NB-IoT",
+      "spec": "TS 36.211",
+      "release": "13",
+      "chunk_index": 0,
+      "chunk_total": 3
+    }
+  },
+  {
+    "text": ". Key features: up to 164 dB MCL (Maximum Coupling Loss) for deep indoor coverage; PSM (Power Saving Mode) and eDRX (Extended Discontinuous Reception) for 10+ year battery life; supports up to 50,000–200,000 devices per cell. Peak data rate: ~250 kbps DL, ~20 kbps UL. Use cases: smart meters, asset tracking, agriculture sensors, smart parking. Half-duplex FDD operation",
+    "metadata": {
+      "source": "3GPP_TS36.211_NB-IoT",
+      "topic": "NB-IoT",
+      "spec": "TS 36.211",
+      "release": "13",
+      "chunk_index": 1,
+      "chunk_total": 3
+    }
+  },
+  {
+    "text": ". Half-duplex FDD operation. Defined in TS 36.211 (NB-IoT physical layer).",
+    "metadata": {
+      "source": "3GPP_TS36.211_NB-IoT",
+      "topic": "NB-IoT",
+      "spec": "TS 36.211",
+      "release": "13",
+      "chunk_index": 2,
+      "chunk_total": 3
+    }
+  }
+]

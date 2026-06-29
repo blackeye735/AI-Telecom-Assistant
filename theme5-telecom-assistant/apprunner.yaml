@@ -1,0 +1,32 @@
+version: 1.0
+runtime: python311
+
+build:
+  commands:
+    build:
+      - echo "Building Docker image from Dockerfile..."
+      - docker build -t telecom-assistant .
+
+run:
+  command: "./startup.sh"
+  network:
+    port: 8501
+  env:
+    - name: LLM_PROVIDER
+      value: "openrouter"
+    - name: OPENROUTER_API_KEY
+      value: "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"
+    - name: OPENROUTER_MODEL
+      value: "openai/gpt-4o"
+    - name: LLM_TEMPERATURE
+      value: "0.1"
+    - name: LLM_MAX_TOKENS
+      value: "1024"
+    - name: EMBEDDING_BACKEND
+      value: "local"
+    - name: CONFIDENCE_THRESHOLD
+      value: "0.6"
+    - name: API_HOST
+      value: "0.0.0.0"
+    - name: API_PORT
+      value: "8000"
